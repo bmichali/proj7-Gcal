@@ -78,29 +78,43 @@
        );
     });
   </script>
+  <label>Begin</label>
+  <input type=time name="start" id="start" value="09:00" />
+  <label>End</label>
+  <input type=time name="end" id="end" value="17:00" />
 
 <br /><input type="submit" value="Choose" />
 </form>
 
-    <!--
-    Show the calendar list (if we have it).  This will need to be turned into
-    a form from which calendars can be picked. Up to three entries are
-    shown in each row (but the order is across then down; I would
-    prefer down then across). 
-    -->
+<h4>Calendars:</h4>
+<form id="select" action="/_getCalendar" method="post">
 {% if g.calendars is defined  %}
   <div class="row">
   {% for cal in g.calendars if cal.selected %}
-          <div class="col-md-4">
-	   {{ cal.summary }}
-          </div>
-         {% if loop.index is divisibleby 3 %}
-          </div> <div class="row">
-         {% endif %}
+      <div class="col-md-6">
+        <input type="checkbox" name="summary" id="{{ cal.summary }}" value="{{ cal.id }}">
+      	   {{ cal.summary }}
+      </div>
   {% endfor %}
   </div>
 {% endif %}
-    
+<input type="submit" value="Select Calendars" name="calendarSubmit" id="calendarSubmit"/>
+</form>
+
+<h4>Events:</h4>
+{% if session.events is defined  %}
+  <div class="row">
+  {% for events in session.events %}
+      {% for event in events %}
+              <div class="col-md-6">
+                  Start: {{ event.start }}
+                  End: {{ event.end }}
+                  Summary: {{ event.summary}}
+              </div>
+      {% endfor %}
+  {% endfor %}
+  </div>
+{% endif %}
 
   </div>  <!-- container (for bootstrap) -->
   </body> </html>
