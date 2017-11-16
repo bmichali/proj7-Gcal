@@ -341,8 +341,9 @@ def list_calendars(service):
 
 def list_events(service, calendar):
     """
-    Based on the calendar, return a list of events, events are all the events inside that calendar.
-    Each event is represented by a dict.
+    Take selected calendar id's from session variable and use them to produce
+    a dict. which contains all the events between specified times obtained from
+    user. Only used when creating the session variable 'events'.
     """
     app.logger.debug("Entering list_events")
     app.logger.debug(interpret_time(flask.session['begin_time'])
