@@ -202,6 +202,10 @@ def oauth2callback():
 
 @app.route('/_getCalendar', methods=['POST'])
 def select_cal():
+    '''
+    Grabs form containing selected calendar id's
+    and stores them in session variable.
+    '''
     flask.session['ids'] = request.form.getlist('summary')
     return flask.redirect(flask.url_for("choose"))
 
