@@ -363,7 +363,7 @@ def list_events(service, calendar):
     for day in days:
         timeMin = day.replace(hour=int(startHour), minute=int(startMin))
         timeMax = day.replace(hour=int(endHour), minute=int(endMin))
-        eventList = service.events().list(calendarId=calendar, timeMin=timeMin,
+        eventList = service.events().list(calendarId=calendar, singleEvents=True, timeMin=timeMin,
                                           timeMax=timeMax).execute()["items"]
         for event in eventList:
             if "transparency" in event:
